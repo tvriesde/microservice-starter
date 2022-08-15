@@ -15,8 +15,9 @@
     "functions": [],
     "variables": {
         "env": "[parameters('env')]",
+        "sku": "[parameters('sku')]",
         "appName": "faas",
-        "storageAccountName": "[variables('appNAme')]"
+        "storageAccountName": "[format('{0}azfunctions', uniqueString(resourceGroup().id))]"
     },
     "resources": [
     {
@@ -29,8 +30,7 @@
         "location": "[resourceGroup().location]",
         "kind": "StorageV2",
         "sku": {
-            "name": "Premium_LRS",
-            "tier": "Premium"
+            "name": "[variables('sku')]"
         }
     }
     ],
