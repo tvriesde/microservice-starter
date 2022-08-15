@@ -12,7 +12,7 @@ pool:
 steps:
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    PathtoPublish: '$(Build.sourcesDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
     StoreAsTar: false
