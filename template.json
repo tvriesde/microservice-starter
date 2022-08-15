@@ -1,0 +1,38 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "env":{
+            "type": "string",
+            "defaultValue": "dev"
+        },
+        "sku":{
+            "type": "string",
+            "defaultvalue": "Standard_LRS"
+        }
+
+    },
+    "functions": [],
+    "variables": {
+        "env": "[parameters('env')]",
+        "appName": "faas",
+        "storageAccountName": "[variables('appNAme')]"
+    },
+    "resources": [
+    {
+        "name": "[variables('storageAccountName')]",
+        "type": "Microsoft.Storage/storageAccounts",
+        "apiVersion": "2021-04-01",
+        "tags": {
+            "env": "[variables('env')]"
+        },
+        "location": "[resourceGroup().location]",
+        "kind": "StorageV2",
+        "sku": {
+            "name": "Premium_LRS",
+            "tier": "Premium"
+        }
+    }
+    ],
+    "outputs": {}
+}
