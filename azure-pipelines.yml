@@ -12,14 +12,7 @@ pool:
 steps:
 - task: PublishBuildArtifacts@1
   inputs:
-    contents:  
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
     StoreAsTar: true
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
-
