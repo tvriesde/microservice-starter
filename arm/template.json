@@ -33,13 +33,13 @@
         "sku": {
             "name": "[variables('sku')]"
         }
-    }//,
-    /*{
+    },
+    {
         "name": "[variables('servicePlanName')]",
         "type": "Microsoft.Web/serverfarms",
         "apiVersion": "2020-12-01",
         "location": "[resourceGroup().location]"
-    }*/
+    }
     ],
     "outputs": {}
 }
