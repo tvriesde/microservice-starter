@@ -9,6 +9,15 @@
         "sku":{
             "type": "string",
             "defaultvalue": "Standard_LRS"
+        },
+        "runtime":{
+           "type": "string",
+           "defaultValue": "node",
+           "allowedValues":[
+                "node",
+                "dotnet",
+                "java"
+           ]
         }
     },
     "functions": [],
@@ -19,7 +28,8 @@
         "servicePlanName": "[concat('plan-',variables('appName'))]",
         "storageAccountName": "[format('{0}azfunctions', uniqueString(resourceGroup().id))]",
         "siteName": "[concat('site-',variables('appName'))]",
-        "applicationInsightsName": "[concat('insights-',variables('appName'))]"
+        "applicationInsightsName": "[concat('insights-',variables('appName'))]",
+        "functionWorkerRuntime":"[parameters('runtime')]"
     },
     "resources": [
     {
@@ -74,6 +84,14 @@
                     {
                         "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
                         "value": "[format('DefaultEndpointsProtocol=https;AccountName={0};EndpointSuffix={1};AccountKey={2}', variables('storageAccountName'), environment().suffixes.storage, listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2021-08-01').keys[0].value)]"
+                    },
+                    {
+                        "name": "WEBSITE_CONTENTSHARE",
+                        "value": "[toLower(variables('appName'))]"
+                    },
+                    {
+                        "name": "FUNCTIONS_WORKER_RUNTIME",
+                        "value": "[variables('functionWorkerRuntime')]"
                     }
                 ],
                 "ftpState": "FtpsOnly",
