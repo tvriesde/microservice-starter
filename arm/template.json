@@ -17,7 +17,9 @@
         "sku": "[parameters('sku')]",
         "appName": "[concat('faas-',parameters('env'),'-',resourceGroup().location)]",
         "servicePlanName": "[concat('plan-',variables('appName'))]",
-        "storageAccountName": "[format('{0}azfunctions', uniqueString(resourceGroup().id))]"
+        "storageAccountName": "[format('{0}azfunctions', uniqueString(resourceGroup().id))]",
+        "siteName": "[concat('site-',variables('appName'))]",
+        "applicationInsightsName": "[concat('insights-',variables('appName'))]",
 
     },
     "resources": [
@@ -43,6 +45,50 @@
         "sku":{
             "name": "Y1",
             "tier":"Dynamics"
+        }
+    },
+    {
+        "type": "Microsoft.Web/sites",
+        "apiVersion": "2021-03-01",
+        "name": "[variables('siteName')]",
+        "location": "[resourceGroup().location]",
+        "kind":"functionapp",
+        "identity": {
+            "type": "SystemAssigned"
+        },
+        "properties":{
+            "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('servicePlanName'))]",
+            "siteConfig":{
+                "appSettings":[
+                    {
+                        "name": "FUNCTIONS_EXTENSION_VERSION",
+                        "value": "~2"
+                    },
+                    {
+                        "name": "WEBSITE_NODE_DEFAULT_VERSION",
+                        "value": "~10"
+                    }
+                ],
+                "ftpState": "FtpsOnly",
+                "minTlsVersion": "1.2"
+            },
+            "httpsOnly": true
+        },
+        "dependsOn":[
+            "[resourceId('Microsoft.Insights/components', variables('applicationInsightsName'))]",
+            "[resourceId('Microsoft.Web/serverfarms', variables('servicePlanName'))]",
+            "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
+        ]
+    },
+    {
+        "type": "Microsoft.Insights/components",
+        "apiVersion": "2020-02-02",
+        "name": "[variables('applicationInsightsName')]",
+        "kind": "web",
+        "location": "[resourceGroup().location]",
+        "properties":{
+            "Application_Type": "web",
+            "Request_Source": "rest"
         }
     }
     ],
