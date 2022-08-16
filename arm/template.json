@@ -19,8 +19,7 @@
         "servicePlanName": "[concat('plan-',variables('appName'))]",
         "storageAccountName": "[format('{0}azfunctions', uniqueString(resourceGroup().id))]",
         "siteName": "[concat('site-',variables('appName'))]",
-        "applicationInsightsName": "[concat('insights-',variables('appName'))]",
-
+        "applicationInsightsName": "[concat('insights-',variables('appName'))]"
     },
     "resources": [
     {
