@@ -17,7 +17,8 @@
         "env": "[parameters('env')]",
         "sku": "[parameters('sku')]",
         "appName": "faas",
-        "functionStorageAccountName" :"[concat('st',parameters('env'),resourceGroup().location)]"
+        //"storageAccountName": "[format('{0}azfunctions', uniqueString(resourceGroup().id))]",
+        "functionStorageAccountName" :"[concat('st',parameters('env'),resourceGroup().location, uniqueString(resourceGroup().id))]"
 
     },
     "resources": [
