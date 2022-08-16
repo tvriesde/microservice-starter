@@ -33,7 +33,7 @@
         "sku": {
             "name": "[variables('sku')]"
         }
-    },
+    }//,
     /*{
         "name": "[variables('servicePlanName')]",
         "type": "Microsoft.Web/serverfarms",
