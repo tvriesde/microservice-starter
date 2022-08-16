@@ -9,6 +9,10 @@
         "sku":{
             "type": "string",
             "defaultvalue": "Standard_LRS"
+        },
+        "storageAccountType":{
+            "type": "string",
+            "defaultvalue":
         }
 
     },
@@ -17,6 +21,7 @@
         "env": "[parameters('env')]",
         "sku": "[parameters('sku')]",
         "appName": "[concat('faas-',parameters('env'),'-',resourceGroup().location)]",
+        "servicePlanName": "[concat('plan-',parameters(appName))]",
         "storageAccountName": "[format('{0}azfunctions', uniqueString(resourceGroup().id))]"
 
     },
@@ -33,6 +38,12 @@
         "sku": {
             "name": "[variables('sku')]"
         }
+    },
+    {
+        "name": "[variables('servicePlanName')]",
+        "type": "Microsoft.Web/serverfarms",
+        "apiVersion": "2020-12-01",
+        "location": "[resourceGroup().location]"
     }
     ],
     "outputs": {}
