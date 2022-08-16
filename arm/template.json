@@ -39,7 +39,11 @@
         "type": "Microsoft.Web/serverfarms",
         "apiVersion": "2020-12-01",
         "location": "[resourceGroup().location]",
-        "properties": {}
+        "properties": {},
+        "sku":{
+            "name": "Y1",
+            "tier":"Dynamics"
+        }
     }
     ],
     "outputs": {}
