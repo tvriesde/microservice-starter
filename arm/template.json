@@ -21,7 +21,7 @@
         "env": "[parameters('env')]",
         "sku": "[parameters('sku')]",
         "appName": "[concat('faas-',parameters('env'),'-',resourceGroup().location)]",
-        "servicePlanName": "[concat('plan-',parameters(appName))]",
+        "servicePlanName": "[concat('plan-',variables('appName'))]",
         "storageAccountName": "[format('{0}azfunctions', uniqueString(resourceGroup().id))]"
 
     },
