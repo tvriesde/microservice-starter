@@ -9,12 +9,7 @@
         "sku":{
             "type": "string",
             "defaultvalue": "Standard_LRS"
-        },
-        "storageAccountType":{
-            "type": "string",
-            "defaultvalue":
         }
-
     },
     "functions": [],
     "variables": {
