@@ -17,11 +17,12 @@
         "env": "[parameters('env')]",
         "sku": "[parameters('sku')]",
         "appName": "faas",
-        "storageAccountName": "[format('{0}azfunctions', uniqueString(resourceGroup().id))]"
+        "functionStorageAccountName" :"[concat('st',parameters('env'),resourceGroup().location)]"
+
     },
     "resources": [
     {
-        "name": "[variables('storageAccountName')]",
+        "name": "[variables('functionStorageAccountName')]",
         "type": "Microsoft.Storage/storageAccounts",
         "apiVersion": "2021-04-01",
         "tags": {
