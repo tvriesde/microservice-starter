@@ -1,0 +1,19 @@
+{
+  "name": "user-service",
+  "version": "1.0.0",
+  "description": "Seed project for faas",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tvriesde/faas_seed.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tvriesde/faas_seed/issues"
+  },
+  "homepage": "https://github.com/tvriesde/faas_seed#readme"
+}

@@ -26,8 +26,6 @@ stages:
        deploy:
          steps:
          - checkout: self
-         - script: echo "hello dev world !!"
-         - script: echo "filetemplate:$(System.DefaultWorkingDirectory)/arm/template.json"
          - task: AzureResourceManagerTemplateDeployment@3
            inputs:
              deploymentScope: 'Resource Group'
