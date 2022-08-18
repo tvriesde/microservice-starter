@@ -20,7 +20,7 @@ stages:
   - deployment: dev_deploy
     pool: 
       vmImage: 'ubuntu-latest'
-    environment: 'dev-hello'
+    environment: 'user-service-dev'
     strategy: 
      runOnce:
        deploy:
@@ -38,4 +38,49 @@ stages:
              csmFile: '$(System.DefaultWorkingDirectory)/arm/template.json'
              csmParametersFile: '$(System.DefaultWorkingDirectory)/arm/params.dev.json'
              deploymentMode: 'Incremental'
-             
+- stage: tst_deploy
+  jobs: 
+  - deployment: tst_deploy
+    pool: 
+      vmImage: 'ubuntu-latest'
+    environment: 'user-service-tst'
+    strategy: 
+     runOnce:
+       deploy:
+         steps:
+         - checkout: self
+         - task: AzureResourceManagerTemplateDeployment@3
+           inputs:
+             deploymentScope: 'Resource Group'
+             azureResourceManagerConnection: 'Visual Studio Enterprise Subscription(d860292c-5d2c-4df3-b7c8-332bd46882d1)'
+             subscriptionId: 'd860292c-5d2c-4df3-b7c8-332bd46882d1'
+             action: 'Create Or Update Resource Group'
+             resourceGroupName: 'user-service'
+             location: 'West Europe'
+             templateLocation: 'Linked artifact'
+             csmFile: '$(System.DefaultWorkingDirectory)/arm/template.json'
+             csmParametersFile: '$(System.DefaultWorkingDirectory)/arm/params.tst.json'
+             deploymentMode: 'Incremental'
+- stage: prd_deploy
+  jobs: 
+  - deployment: prd_deploy
+    pool: 
+      vmImage: 'ubuntu-latest'
+    environment: 'user-service-prd'
+    strategy: 
+     runOnce:
+       deploy:
+         steps:
+         - checkout: self
+         - task: AzureResourceManagerTemplateDeployment@3
+           inputs:
+             deploymentScope: 'Resource Group'
+             azureResourceManagerConnection: 'Visual Studio Enterprise Subscription(d860292c-5d2c-4df3-b7c8-332bd46882d1)'
+             subscriptionId: 'd860292c-5d2c-4df3-b7c8-332bd46882d1'
+             action: 'Create Or Update Resource Group'
+             resourceGroupName: 'user-service'
+             location: 'West Europe'
+             templateLocation: 'Linked artifact'
+             csmFile: '$(System.DefaultWorkingDirectory)/arm/template.json'
+             csmParametersFile: '$(System.DefaultWorkingDirectory)/arm/params.prd.json'
+             deploymentMode: 'Incremental'
