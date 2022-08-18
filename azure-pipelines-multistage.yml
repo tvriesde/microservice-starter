@@ -35,7 +35,7 @@ stages:
              resourceGroupName: 'user-service-dev'
              location: 'West Europe'
              templateLocation: 'Linked artifact'
-             csmFile: '$(System.DefaultWorkingDirectory)/arm/template.json'
+             csmFile: '$(System.DefaultWorkingDirectory)/arm/template.bicep'
              csmParametersFile: '$(System.DefaultWorkingDirectory)/arm/params.dev.json'
              deploymentMode: 'Incremental'
 - stage: tst_deploy
@@ -58,7 +58,7 @@ stages:
              resourceGroupName: 'user-service-tst'
              location: 'West Europe'
              templateLocation: 'Linked artifact'
-             csmFile: '$(System.DefaultWorkingDirectory)/arm/template.json'
+             csmFile: '$(System.DefaultWorkingDirectory)/arm/template.bicep'
              csmParametersFile: '$(System.DefaultWorkingDirectory)/arm/params.tst.json'
              deploymentMode: 'Incremental'
 - stage: prd_deploy
@@ -81,6 +81,6 @@ stages:
              resourceGroupName: 'user-service-prd'
              location: 'West Europe'
              templateLocation: 'Linked artifact'
-             csmFile: '$(System.DefaultWorkingDirectory)/arm/template.json'
+             csmFile: '$(System.DefaultWorkingDirectory)/arm/template.bicep'
              csmParametersFile: '$(System.DefaultWorkingDirectory)/arm/params.prd.json'
              deploymentMode: 'Incremental'
