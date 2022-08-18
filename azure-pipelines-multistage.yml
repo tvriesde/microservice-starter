@@ -25,6 +25,7 @@ stages:
      runOnce:
        deploy:
          steps:
+         - checkout: self
          - script: echo "hello dev world !!"
          - script: echo "filetemplate:$(System.DefaultWorkingDirectory)/arm/template.json"
          - task: AzureResourceManagerTemplateDeployment@3
@@ -39,3 +40,4 @@ stages:
              csmFile: '$(System.DefaultWorkingDirectory)/arm/template.json'
              csmParametersFile: '$(System.DefaultWorkingDirectory)/arm/params.dev.json'
              deploymentMode: 'Incremental'
+             
