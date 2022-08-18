@@ -4,6 +4,15 @@
   "parameters": {
     "env":{
       "value": "tst"
+    },
+    "runtime":{
+      "value": "node"
+    },
+    "component":{
+      "value": "user-service"
+    },
+    "product":{
+      "value": "myApp"
     }
   }
 }

@@ -4,6 +4,15 @@
   "parameters": {
     "env":{
       "value": "prd"
+    },
+    "runtime":{
+      "value": "node"
+    },
+    "component":{
+      "value": "user-service"
+    },
+    "product":{
+      "value": "myApp"
     }
   }
 }
