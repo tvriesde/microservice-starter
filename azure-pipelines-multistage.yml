@@ -55,7 +55,7 @@ stages:
              azureSubscription: 'Visual Studio Enterprise Subscription(d860292c-5d2c-4df3-b7c8-332bd46882d1)'
              appType: 'functionApp'
              appName: 'site-myApp-user-service-dev-westeurope'
-             package: '$(System.DefaultWorkingDirectory)/FunctionApp/$(Build.BuildId).zip'
+             package: '$(Pipeline.Workspace)/FunctionApp/$(Build.BuildId).zip'
              deploymentMethod: 'auto'             
 - stage: tst_deploy
   jobs: 
@@ -87,7 +87,7 @@ stages:
              azureSubscription: 'Visual Studio Enterprise Subscription(d860292c-5d2c-4df3-b7c8-332bd46882d1)'
              appType: 'functionApp'
              appName: 'site-myApp-user-service-dev-westeurope'
-             package: '$(System.DefaultWorkingDirectory)/FunctionApp/$(Build.BuildId).zip'
+             package: '$(Pipeline.Workspace)/FunctionApp/$(Build.BuildId).zip'
              deploymentMethod: 'auto'
 - stage: prd_deploy
   jobs: 
@@ -119,5 +119,5 @@ stages:
              azureSubscription: 'Visual Studio Enterprise Subscription(d860292c-5d2c-4df3-b7c8-332bd46882d1)'
              appType: 'functionApp'
              appName: 'site-myApp-user-service-prd-westeurope'
-             package: '$(System.DefaultWorkingDirectory)/FunctionApp/$(Build.BuildId).zip'
+             package: '$(Pipeline.Workspace)/FunctionApp/$(Build.BuildId).zip'
              deploymentMethod: 'auto'             
