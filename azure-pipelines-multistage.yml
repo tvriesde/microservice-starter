@@ -35,6 +35,6 @@ stages:
              resourceGroupName: 'user-service'
              location: 'West Europe'
              templateLocation: 'Linked artifact'
-             csmFile: 'arm/template.json'
-             csmParametersFile: 'arm/params.dev.json'
+             csmFile: '$(System.DefaultWorkingDirectory)/arm/template.json'
+             csmParametersFile: '$(System.DefaultWorkingDirectory)/arm/params.dev.json'
              deploymentMode: 'Incremental'
