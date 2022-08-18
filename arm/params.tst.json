@@ -13,6 +13,9 @@
     },
     "product":{
       "value": "myApp"
+    },
+    "sku":{
+      "value": "Standard_LRS"
     }
   }
 }
