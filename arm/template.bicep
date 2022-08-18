@@ -14,10 +14,10 @@ param product string
 var env_var = env
 var sku_var = sku
 var appName = '${product}-${component}-${env}-${location}'
-var servicePlanName_var = 'plan-${appName}'
+var servicePlanName = 'plan-${appName}'
 var storageAccountName = '${component}-${uniqueString(resourceGroup().id)}'
 var siteName_var = 'site-${appName}'
-var applicationInsightsName_var = 'insights-${appName}'
+var applicationInsightsName = 'insights-${appName}'
 var functionWorkerRuntime = runtime
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
@@ -33,7 +33,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
 }
 
 resource servicePlan 'Microsoft.Web/serverfarms@2020-12-01' = {
-  name: servicePlanName_var
+  name: servicePlanName
   location: location
   properties: {
   }
@@ -64,11 +64,11 @@ resource site 'Microsoft.Web/sites@2021-03-01' = {
         }
         {
           name: 'AzureWebJobsStorage'
-          value: 'DefaultEndpointsProtocol=https;AccountName=${storageAccountName};EndpointSuffix=${environment().suffixes.storage};AccountKey=${listKeys(storageAccountName.id, '2021-08-01').keys[0].value}'
+          value: 'DefaultEndpointsProtocol=https;AccountName=${storageAccountName};EndpointSuffix=${environment().suffixes.storage};AccountKey=${listKeys(storageAccount.id, '2021-08-01').keys[0].value}'
         }
         {
           name: 'WEBSITE_CONTENTAZUREFILECONNECTIONSTRING'
-          value: 'DefaultEndpointsProtocol=https;AccountName=${storageAccountName};EndpointSuffix=${environment().suffixes.storage};AccountKey=${listKeys(storageAccountName.id, '2021-08-01').keys[0].value}'
+          value: 'DefaultEndpointsProtocol=https;AccountName=${storageAccountName};EndpointSuffix=${environment().suffixes.storage};AccountKey=${listKeys(storageAccount.id, '2021-08-01').keys[0].value}'
         }
         {
           name: 'WEBSITE_CONTENTSHARE'
@@ -79,7 +79,6 @@ resource site 'Microsoft.Web/sites@2021-03-01' = {
           value: functionWorkerRuntime
         }
       ]
-      ftpState: 'FtpsOnly'
       minTlsVersion: '1.2'
     }
     httpsOnly: true
@@ -91,7 +90,7 @@ resource site 'Microsoft.Web/sites@2021-03-01' = {
 }
 
 resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
-  name: applicationInsightsName_var
+  name: applicationInsightsName
   kind: 'web'
   location: location
   properties: {
