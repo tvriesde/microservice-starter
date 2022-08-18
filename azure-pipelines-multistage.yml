@@ -15,6 +15,15 @@ stages:
     continueOnError: false
     steps:
     - script: echo "Build tasks"
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(Build.BinariesDirectory)'
+        includeRootFolder: true
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+        replaceExistingArchive: true
+    - publish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+      artifact: FunctionApp
 - stage: dev_deploy
   jobs: 
   - deployment: dev_deploy
@@ -38,6 +47,15 @@ stages:
              csmFile: '$(System.DefaultWorkingDirectory)/arm/template.bicep'
              csmParametersFile: '$(System.DefaultWorkingDirectory)/arm/params.dev.json'
              deploymentMode: 'Incremental'
+         - download: current
+           artifact: FunctionApp
+         - task: AzureFunctionApp@1
+           inputs:
+             azureSubscription: 'Visual Studio Enterprise Subscription(d860292c-5d2c-4df3-b7c8-332bd46882d1)'
+             appType: 'functionApp'
+             appName: 'site-myApp-user-service-dev-westeurope'
+             package: '$(System.DefaultWorkingDirectory)/$(Build.BuildId).zip'
+             deploymentMethod: 'auto'             
 - stage: tst_deploy
   jobs: 
   - deployment: tst_deploy
@@ -61,6 +79,15 @@ stages:
              csmFile: '$(System.DefaultWorkingDirectory)/arm/template.bicep'
              csmParametersFile: '$(System.DefaultWorkingDirectory)/arm/params.tst.json'
              deploymentMode: 'Incremental'
+         - download: current
+           artifact: FunctionApp             
+         - task: AzureFunctionApp@1
+           inputs:
+             azureSubscription: 'Visual Studio Enterprise Subscription(d860292c-5d2c-4df3-b7c8-332bd46882d1)'
+             appType: 'functionApp'
+             appName: 'site-myApp-user-service-dev-westeurope'
+             package: '$(System.DefaultWorkingDirectory)/$(Build.BuildId).zip'
+             deploymentMethod: 'auto'
 - stage: prd_deploy
   jobs: 
   - deployment: prd_deploy
@@ -84,3 +111,12 @@ stages:
              csmFile: '$(System.DefaultWorkingDirectory)/arm/template.bicep'
              csmParametersFile: '$(System.DefaultWorkingDirectory)/arm/params.prd.json'
              deploymentMode: 'Incremental'
+         - download: current
+           artifact: FunctionApp             
+         - task: AzureFunctionApp@1
+           inputs:
+             azureSubscription: 'Visual Studio Enterprise Subscription(d860292c-5d2c-4df3-b7c8-332bd46882d1)'
+             appType: 'functionApp'
+             appName: 'site-myApp-user-service-prd-westeurope'
+             package: '$(System.DefaultWorkingDirectory)/$(Build.BuildId).zip'
+             deploymentMethod: 'auto'             
