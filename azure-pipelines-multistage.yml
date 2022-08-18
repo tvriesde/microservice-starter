@@ -26,3 +26,15 @@ stages:
        deploy:
          steps:
          - script: echo "hello dev world !!"
+         - task: AzureResourceManagerTemplateDeployment@3
+           inputs:
+             deploymentScope: 'Resource Group'
+             azureResourceManagerConnection: 'Visual Studio Enterprise Subscription(d860292c-5d2c-4df3-b7c8-332bd46882d1)'
+             subscriptionId: 'd860292c-5d2c-4df3-b7c8-332bd46882d1'
+             action: 'Create Or Update Resource Group'
+             resourceGroupName: 'user-service'
+             location: 'West Europe'
+             templateLocation: 'Linked artifact'
+             csmFile: 'arm/template.json'
+             csmParametersFile: 'arm/params.dev.json'
+             deploymentMode: 'Incremental'
