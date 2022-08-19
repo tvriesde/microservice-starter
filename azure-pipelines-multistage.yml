@@ -16,14 +16,7 @@ stages:
     steps:
     - script: echo "Build tasks"
     - checkout: self
-    - task: ArchiveFiles@2
-      inputs:
-        rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
-        includeRootFolder: true
-        archiveType: 'zip'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-        replaceExistingArchive: true
-    - publish: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    - publish: '$(Build.ArtifactStagingDirectory)'
       artifact: FunctionApp
 - stage: dev_deploy
   jobs: 
