@@ -14,10 +14,17 @@ stages:
       vmImage: 'ubuntu-latest'
     continueOnError: false
     steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '6.x'
+        checkLatest: true
     - script: echo "Build tasks"
     - checkout: self
+    - script: npm install
+      workingDirectory: '$(Build.ArtifactStagingDirectory)'
+      displayName: "Install npm"
     - publish: '$(Build.ArtifactStagingDirectory)'
-      artifact: FunctionApp
+      artifact: FunctionApp   
 - stage: dev_deploy
   jobs: 
   - deployment: dev_deploy
@@ -80,7 +87,7 @@ stages:
              azureSubscription: 'Visual Studio Enterprise Subscription(d860292c-5d2c-4df3-b7c8-332bd46882d1)'
              appType: 'functionApp'
              appName: 'site-myApp-user-service-dev-westeurope'
-             package: '$(Pipeline.Workspace)/FunctionApp/$(Build.BuildId).zip'
+             package: '$(Pipeline.Workspace)/FunctionApp/'
              deploymentMethod: 'auto'
 - stage: prd_deploy
   jobs: 
@@ -112,5 +119,5 @@ stages:
              azureSubscription: 'Visual Studio Enterprise Subscription(d860292c-5d2c-4df3-b7c8-332bd46882d1)'
              appType: 'functionApp'
              appName: 'site-myApp-user-service-prd-westeurope'
-             package: '$(Pipeline.Workspace)/FunctionApp/$(Build.BuildId).zip'
+             package: '$(Pipeline.Workspace)/FunctionApp'
              deploymentMethod: 'auto'             
