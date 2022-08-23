@@ -21,7 +21,7 @@ stages:
     - script: echo "Build tasks"
     - checkout: self
     - script: npm install
-      workingDirectory: '$(Build.ArtifactStagingDirectory)'
+      workingDirectory: $(System.DefaultWorkingDirectory)
       displayName: "Install npm"
     - publish: '$(Build.ArtifactStagingDirectory)'
       artifact: FunctionApp   
