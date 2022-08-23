@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/tvriesde/faas_seed/issues"
   },
-  "homepage": "https://github.com/tvriesde/faas_seed#readme"
+  "homepage": "https://github.com/tvriesde/faas_seed#readme",
+  "dependencies": {
+    "date": "^2.0.0"
+  }
 }
