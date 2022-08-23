@@ -21,10 +21,16 @@ stages:
     - script: echo "Build tasks"
     - checkout: self
     - script: npm install
-      workingDirectory: $(System.DefaultWorkingDirectory)
+      workingDirectory: $(System.DefaultWorkingDirectory)/src
       displayName: "Install npm"
+    - task: ArchiveFiles@2
+      displayName: "Archive files"
+      inputs:
+        rootFolderOrFile: "$(System.DefaultWorkingDirectory)"
+        includeRootFolder: false
+        archiveFile: "$(System.DefaultWorkingDirectory)/build$(Build.BuildId).zip"
     - publish: '$(System.DefaultWorkingDirectory)'
-      artifact: FunctionApp   
+      artifact: FunctionApp
 - stage: dev_deploy
   jobs: 
   - deployment: dev_deploy
