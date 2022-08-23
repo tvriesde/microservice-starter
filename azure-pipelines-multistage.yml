@@ -23,7 +23,7 @@ stages:
     - script: npm install
       workingDirectory: $(System.DefaultWorkingDirectory)
       displayName: "Install npm"
-    - publish: '$(Build.ArtifactStagingDirectory)'
+    - publish: '$(System.DefaultWorkingDirectory)'
       artifact: FunctionApp   
 - stage: dev_deploy
   jobs: 
