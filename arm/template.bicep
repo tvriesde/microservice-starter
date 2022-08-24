@@ -26,7 +26,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
     env: env_var
   }
   location: location
-  kind: 'StorageV2'
+  kind: 'Storage'
   sku: {
     name: sku_var
   }
@@ -77,6 +77,10 @@ resource site 'Microsoft.Web/sites@2021-03-01' = {
         {
           name: 'FUNCTIONS_WORKER_RUNTIME'
           value: functionWorkerRuntime
+        }
+        {
+          name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
+          value: applicationInsights.properties.InstrumentationKey
         }
       ]
       minTlsVersion: '1.2'
