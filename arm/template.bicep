@@ -56,7 +56,7 @@ resource site 'Microsoft.Web/sites@2021-03-01' = {
       appSettings: [
         {
           name: 'FUNCTIONS_EXTENSION_VERSION'
-          value: '~2'
+          value: '~4'
         }
         {
           name: 'WEBSITE_NODE_DEFAULT_VERSION'
@@ -80,6 +80,7 @@ resource site 'Microsoft.Web/sites@2021-03-01' = {
         }
       ]
       minTlsVersion: '1.2'
+      ftpsState: 'FtpsOnly'
     }
     httpsOnly: true
   }
