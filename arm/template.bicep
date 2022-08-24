@@ -84,6 +84,7 @@ resource site 'Microsoft.Web/sites@2021-03-01' = {
         }
       ]
       minTlsVersion: '1.2'
+      nodeVersion: 'Node.js 16 LTS'
       ftpsState: 'FtpsOnly'
     }
     httpsOnly: true
