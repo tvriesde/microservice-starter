@@ -110,7 +110,7 @@ stages:
            inputs:
              azureSubscription: 'Visual Studio Enterprise Subscription(d860292c-5d2c-4df3-b7c8-332bd46882d1)'
              appType: 'functionApp'
-             appName: 'site-myApp-user-service-dev-westeurope'
+             appName: 'site-myApp-user-service-tst-westeurope'
              package: '$(System.DefaultWorkingDirectory)/build$(Build.BuildId).zip'
              deploymentMethod: 'auto'
 
