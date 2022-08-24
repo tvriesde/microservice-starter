@@ -26,7 +26,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
     env: env_var
   }
   location: location
-  kind: 'Storage'
+  kind: 'StorageV2'
   sku: {
     name: sku_var
   }
