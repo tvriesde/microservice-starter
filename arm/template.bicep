@@ -60,7 +60,7 @@ resource site 'Microsoft.Web/sites@2021-03-01' = {
         }
         {
           name: 'WEBSITE_NODE_DEFAULT_VERSION'
-          value: '~10'
+          value: '~16'
         }
         {
           name: 'AzureWebJobsStorage'
@@ -84,7 +84,6 @@ resource site 'Microsoft.Web/sites@2021-03-01' = {
         }
       ]
       minTlsVersion: '1.2'
-      nodeVersion: 'Node.js 16 LTS'
       ftpsState: 'FtpsOnly'
     }
     httpsOnly: true
