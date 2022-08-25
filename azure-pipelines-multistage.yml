@@ -6,6 +6,9 @@
 trigger:
 - main
 
+variables:
+- group: StarterProject
+
 stages:
 - stage: Build
   jobs:
@@ -46,8 +49,8 @@ stages:
          - task: AzureResourceManagerTemplateDeployment@3
            inputs:
              deploymentScope: 'Resource Group'
-             azureResourceManagerConnection: 'Visual Studio Enterprise Subscription(d860292c-5d2c-4df3-b7c8-332bd46882d1)'
-             subscriptionId: 'd860292c-5d2c-4df3-b7c8-332bd46882d1'
+             azureResourceManagerConnection: '$(ResourceManagerConnection)'
+             subscriptionId: '$(SubscriptionId)'
              action: 'Create Or Update Resource Group'
              resourceGroupName: 'user-service-dev'
              location: 'West Europe'
@@ -87,8 +90,8 @@ stages:
          - task: AzureResourceManagerTemplateDeployment@3
            inputs:
              deploymentScope: 'Resource Group'
-             azureResourceManagerConnection: 'Visual Studio Enterprise Subscription(d860292c-5d2c-4df3-b7c8-332bd46882d1)'
-             subscriptionId: 'd860292c-5d2c-4df3-b7c8-332bd46882d1'
+             azureResourceManagerConnection: '$(ResourceManagerConnection)'
+             subscriptionId: '$(SubscriptionId)'
              action: 'Create Or Update Resource Group'
              resourceGroupName: 'user-service-tst'
              location: 'West Europe'
@@ -108,7 +111,7 @@ stages:
 
          - task: AzureFunctionApp@1
            inputs:
-             azureSubscription: 'Visual Studio Enterprise Subscription(d860292c-5d2c-4df3-b7c8-332bd46882d1)'
+             azureSubscription: '$(ResourceManagerConnection)'
              appType: 'functionApp'
              appName: 'site-myApp-user-service-tst-westeurope'
              package: '$(System.DefaultWorkingDirectory)/build$(Build.BuildId).zip'
@@ -128,8 +131,8 @@ stages:
          - task: AzureResourceManagerTemplateDeployment@3
            inputs:
              deploymentScope: 'Resource Group'
-             azureResourceManagerConnection: 'Visual Studio Enterprise Subscription(d860292c-5d2c-4df3-b7c8-332bd46882d1)'
-             subscriptionId: 'd860292c-5d2c-4df3-b7c8-332bd46882d1'
+             azureResourceManagerConnection: '$(ResourceManagerConnection)'
+             subscriptionId: '$(SubscriptionId)'
              action: 'Create Or Update Resource Group'
              resourceGroupName: 'user-service-prd'
              location: 'West Europe'
@@ -149,7 +152,7 @@ stages:
 
          - task: AzureFunctionApp@1
            inputs:
-             azureSubscription: 'Visual Studio Enterprise Subscription(d860292c-5d2c-4df3-b7c8-332bd46882d1)'
+             azureSubscription: '$(ResourceManagerConnection)'
              appType: 'functionApp'
              appName: 'site-myApp-user-service-prd-westeurope'
              package: '$(System.DefaultWorkingDirectory)/build$(Build.BuildId).zip'
