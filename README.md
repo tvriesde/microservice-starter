@@ -1,4 +1,4 @@
-# faas_seed
+# user-service
 Seed project for faas 
 
 In order to build & release do following in azure devops
