@@ -10,7 +10,9 @@ param runtime string = 'node'
 param location string = resourceGroup().location
 param component string
 param product string
+param ApiServiceRG string
 
+var apiServiceName = 'apiservice${uniqueString(resourceGroup().id)}'
 var env_var = env
 var sku_var = sku
 var appName = '${product}-${component}-${env}-${location}'
@@ -103,4 +105,14 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
     Application_Type: 'web'
     Request_Source: 'rest'
   }
+}
+
+resource ApiService 'Microsoft.ApiManagement/service@2021-08-01' existing =  {
+  name: apiServiceName
+  scope: resourceGroup(ApiServiceRG)
+}
+
+resource ApiManagementApi 'Microsoft.ApiManagement/service/apis@2021-12-01-preview' = {
+  name: apiName
+  parent: ApiService
 }

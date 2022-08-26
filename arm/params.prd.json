@@ -16,6 +16,9 @@
     },
     "sku":{
       "value": "Standard_LRS"
+    },
+    "ApiServiceRG":{
+      "value":"generic-infra-prd"
     }
   }
 }
