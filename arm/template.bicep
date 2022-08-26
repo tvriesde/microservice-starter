@@ -18,6 +18,7 @@ var servicePlanName = 'plan-${appName}'
 var storageAccountName = toLower('${product}${uniqueString(resourceGroup().id)}')
 var siteName_var = 'site-${appName}'
 var applicationInsightsName = 'insights-${appName}'
+var apiName = 'api-${appName}'
 var functionWorkerRuntime = runtime
 
 resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
@@ -102,4 +103,8 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
     Application_Type: 'web'
     Request_Source: 'rest'
   }
+}
+
+resource ApiManagementApi 'Microsoft.ApiManagement/service/apis@2021-12-01-preview' = {
+  name: apiName
 }
