@@ -106,5 +106,5 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
 }
 
 resource ApiManagementApi 'Microsoft.ApiManagement/service/apis@2021-12-01-preview' = {
-  name: apiName
+  name: 'test'
 }
