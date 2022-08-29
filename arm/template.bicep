@@ -107,14 +107,11 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
-
-
 module ApiServiceAPI 'apimanagementapi.bicep' ={
   name: 'Api'
   scope: resourceGroup(ApiServiceRG)
   params:{
     apiName: apiName
-    ApiService: ApiServiceName
-    ApiServiceRG: ApiServiceRG
+    ApiServiceName: apiServiceName
   }  
 }
