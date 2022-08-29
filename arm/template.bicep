@@ -112,7 +112,11 @@ resource ApiService 'Microsoft.ApiManagement/service@2021-08-01' existing =  {
   scope: resourceGroup(ApiServiceRG)
 }
 
-resource ApiManagementApi 'Microsoft.ApiManagement/service/apis@2021-12-01-preview' = {
-  name: apiName
-  parent: ApiService
+module ApiServiceAPI 'apimanagementapi.bicep' ={
+  name: 'Api'
+  scope: resourceGroup(ApiServiceRG)
+  params:{
+    apiName: apiName
+    ApiService: ApiService
+  }  
 }
