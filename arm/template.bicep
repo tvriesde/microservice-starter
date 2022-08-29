@@ -107,16 +107,14 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
-resource ApiService 'Microsoft.ApiManagement/service@2021-08-01' existing =  {
-  name: apiServiceName
-  scope: resourceGroup(ApiServiceRG)
-}
+
 
 module ApiServiceAPI 'apimanagementapi.bicep' ={
   name: 'Api'
   scope: resourceGroup(ApiServiceRG)
   params:{
     apiName: apiName
-    ApiService: ApiService
+    ApiService: ApiServiceName
+    ApiServiceRG: ApiServiceRG
   }  
 }
