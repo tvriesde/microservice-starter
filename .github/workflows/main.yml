@@ -28,3 +28,33 @@ jobs:
       # Runs a single command using the runners shell
       - name: Install
         run: npm install src/
+  
+  DeployDev:
+    name: Deploy to Dev
+    needs: [Build]
+    runs-on: ubuntu-latest
+    environment:
+      name: dev
+    steps:
+      - name: Deploy
+        run: echo I am deploying!
+
+  DeployDev:
+    name: Deploy to tst
+    needs: [Build]
+    runs-on: ubuntu-latest
+    environment:
+      name: tst
+    steps:
+      - name: Deploy
+        run: echo I am deploying!
+        
+  DeployDev:
+    name: Deploy to prd
+    needs: [Build]
+    runs-on: ubuntu-latest
+    environment:
+      name: prd
+    steps:
+      - name: Deploy
+        run: echo I am deploying!                
