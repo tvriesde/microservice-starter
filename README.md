@@ -7,5 +7,5 @@ In order to build & release do following in azure devops
 1. Create multistage pipeline using azure-pipelines.yml
 
 Project functionality
-The project contains a service named user-service, it does CRUD operations on an object called user.
+The project contains a service named user-service. Which is currently empty.
 
