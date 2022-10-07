@@ -36,8 +36,8 @@ jobs:
     environment:
       name: dev
     steps:
-      - name: Deploy
-        run: echo I am deploying!
+      - name: foldercontent
+        run: dir
 
  # Log into Azure
       - uses: azure/login@v1
